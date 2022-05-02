@@ -1,6 +1,6 @@
 const { NotImplementedError } = require('../extensions/index.js');
 
-// const { ListNode } = require('../extensions/list-node.js');
+const { ListNode } = require('../extensions/list-node.js');
 
 /**
  * Implement the Queue with a given interface via linked list (use ListNode extension above).
@@ -15,41 +15,56 @@ const { NotImplementedError } = require('../extensions/index.js');
  */
 
 
- class ListNode {
-  constructor(value) {
-    this.value = value;
-    this.next = null;
-  }
-}
+class Queue {
+  constructor() {
+    this.first = null;
+  };
 
-function Queue () {
-  collection = [];
+  getUnderlyingList() {               
+    return this.first;
+  };
+  enqueue(value) {
+    let node = new ListNode(value);
 
-  this.getUnderlyingList = function() {               //this function doesn't work
-    return printArrElements(this.value, next);
-
-    function printArrElements(value, next) {
-      if (this.next === null) {
-        return collection;
+    if (!this.first){
+      this.first = node;
+    } else {
+      let n = this.first;
+      while (n.next) {
+        n = n.next;
       }
-      if (this.next !== null) {
-        collection.push(value);
-        value = this.value;
-        next = this.next;
-        return printArrElements()
-      }
+      n.next = node;
     }
-  }
-
-  this.enqueue = function(value) {
-    collection.push(value);
 };
-
-  this.dequeue = function() {
-    return collection.shift();
+  dequeue() {
+    let temp = this.first.value;
+    this.first = this.first.next;
+    return temp;
   }
 }
 
 module.exports = {
   Queue
 };
+
+
+//getUnderLine
+    // return printArrElements(this.value, next);   //this function doesn't work    
+    // function printArrElements(value, next) {
+    //   if (this.next === null) {
+    //     return collection;
+    //   } else {
+    //     collection.push(value);
+    //     value = this.value;
+    //     next = this.next;
+    //     return printArrElements(value, next);
+    //   }
+    // }
+
+    // value = this.value;
+    // function printArrElements(value, next) {
+    //   while (value.next) {
+    //     collection.push(value);
+    //     value = value.next;
+    //   }
+    // }

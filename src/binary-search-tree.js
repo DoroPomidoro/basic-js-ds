@@ -6,9 +6,172 @@ const { NotImplementedError } = require('../extensions/index.js');
 * Implement simple binary search tree according to task description
 * using Node from extensions
 */
+// class Node {
+//   constructor(value) {
+//     this.value = value;
+//     this.left = null;
+//     this.right = null;
+//   }
+// }
+
+// class BinarySearchTree {
+
+//   constructor() {
+//     this.roots = null;
+//   }
+
+//   root() {
+//       return this.roots;
+//   }
+
+//   add(value) {
+//     this.roots = addWithin(this.roots, value);
+    
+//     function addWithin(node, value) {
+//       if (!node) {
+//         return new Node(value);
+//       }
+
+//       if (node.value === value) {
+//         return node;
+//       }
+
+//       if (value < node.value) {
+//         node.left = addWithin(node.left, value);
+//       } else {
+//         node.right = addWithin(node.right, value);
+//       }
+
+//       return node;
+//     } 
+//   }
+
+//   has(value) {
+//     return searchWithin(this.roots, value);
+
+//     function searchWithin(node, value) {
+//       if (!node) {
+//         return false;
+//       } 
+
+//       if (node.value === value) {
+//         return true;
+//       }
+
+//       if (value < node.value) {
+//         return searchWithin(node.left, value);
+//       } else {
+//         return searchWithin(node.right, value);
+//       }
+//     }
+//   }
+
+//   find(value) {
+//     return findWithin(this.roots, value);
+
+
+//     function findWithin(node, value) {
+//       if (!node) {
+//         return null;
+//       }
+
+//       // while (node.value !== value) {
+//       //   if (value < node.value) {
+//       //     node = node.left;
+//       //   } else {
+//       //     node = node.right;
+//       //   }
+//       // }
+//       // return node;
+
+//       if (node.value === value) {
+//         return node.value;
+//       }
+
+//       if (value < node.value) {
+//         return findWithin(node.left, value);
+//       } else {
+//         return findWithin(node.right, value);
+//       }
+//     }
+//   }
+
+//   remove(value) {
+//     this.roots = removeNode(this.roots, value);
+
+//     function removeNode(node, value) {
+//       if (!node) {
+//         return null;
+//       }
+
+//       if (value < node.value) {
+//         node.left = removeNode(node.left, value);
+//         return node;
+//       } else if (value > node.value) {
+//         node.right = removeNode(node.right, value);
+//         return node;
+//       } else {
+//           //this value equal! and it need delete from branch after follow test
+        
+//         if (!node.left && !node.right) {
+//           return null;
+//         };
+
+//         if (!node.left) {
+//           node = node.right; 
+//           return node;
+//         }
+//         if (!node.right) {
+//           node = node.left;
+//           return node;
+//         }
+
+//         //if node have both elements
+//         let minFromRight = node.right;
+//         while (minFromRight.left) {
+//           minFromRight = minFromRight.left;
+//         }
+//         node.value = minFromRight.value;
+
+//         node.right = removeNode(node.right, minFromRight.value) 
+        
+//         return node;
+//       }
+//     }
+//   }
+
+//   min() {
+//     if (!this.roots) {
+//       return null;
+//     }
+
+//     let node = this.roots;
+//     while (node.left) {
+//       node = node.left;
+//     }
+
+//     return node.value;
+// }
+
+//   max() {
+//     if (!this.roots) {
+//       return null;
+//     }
+
+//     let node = this.roots;
+//     while (node.right) {
+//       node = node.right;
+//     }
+
+//     return node.value;
+//   }
+// }
+
+
+
 class Node {
-  constructor(value) {
-    this.value = value;
+  constructor(data) {
+    this.data = data;
     this.left = null;
     this.right = null;
   }
@@ -21,95 +184,97 @@ class BinarySearchTree {
   }
 
   root() {
-    if (!this.roots) {
-      return null;
-    } else {
       return this.roots;
-    }
   }
 
-  add(value) {
-    this.roots = addWithin(this.roots, value);
+  add(data) {
+    this.roots = addWithin(this.roots, data);
     
-    function addWithin(node, value) {
+    function addWithin(node, data) {
       if (!node) {
-        return new Node(value);
+        return new Node(data);
       }
 
-      if (node.value === value) {
+      if (node.data === data) {
         return node;
       }
 
-      if (value < node.value) {
-        node.left = addWithin(node.left, value);
+      if (data < node.data) {
+        node.left = addWithin(node.left, data);
       } else {
-        node.right = addWithin(node.right, value);
+        node.right = addWithin(node.right, data);
       }
 
       return node;
     } 
   }
 
-  has(value) {
-    return searchWithin(this.roots, value);
+  has(data) {
+    return searchWithin(this.roots, data);
 
-    function searchWithin(node, value) {
+    function searchWithin(node, data) {
       if (!node) {
         return false;
       } 
 
-      if (node.value === value) {
+      if (node.data === data) {
         return true;
       }
 
-      if (value < node.value) {
-        return searchWithin(node.left, value);
+      if (data < node.data) {
+        return searchWithin(node.left, data);
       } else {
-        return searchWithin(node.right, value);
+        return searchWithin(node.right, data);
       }
     }
   }
 
-  find(value) {
-    console.log(`Hello! we are into find function ${value}`);
-    return findWithin(this.roots, value);
+  find(data) {
+    return findWithin(this.roots, data);
 
-    function findWithin(node, value) {
+
+    function findWithin(node, data) {
       if (!node) {
-        console.log(`node in !node ${!node}`);
         return null;
       }
 
-      if (node.value === value) {
-        console.log(`node.value === value! It's great and correct! ${value}`);
-        return value;
+      // while (node.data !== data) {
+      //   if (data < node.data) {
+      //     node = node.left;
+      //   } else {
+      //     node = node.right;
+      //   }
+      // }
+      // return node;
+      
+      if (node.data === data) {
+        return node.data;
       }
 
-      if (value < node.value) {
-        console.log(`value < node.value ${value}`);
-        return findWithin(node.left, value);
+      if (data < node.data) {
+        return findWithin(node.left, data);
       } else {
-        return findWithin(node.right, value);
+        return findWithin(node.right, data);
       }
     }
   }
 
-  remove(value) {
-    this.roots = removeNode(this.roots, value);
+  remove(data) {
+    this.roots = removeNode(this.roots, data);
 
-    function removeNode(node, value) {
+    function removeNode(node, data) {
       if (!node) {
         return null;
       }
 
-      if (value < node.value) {
-        node.left = removeNode(node.left, value);
+      if (data < node.data) {
+        node.left = removeNode(node.left, data);
         return node;
-      } else if (value > node.value) {
-        node.right = removeNode(node.right, value);
+      } else if (data > node.data) {
+        node.right = removeNode(node.right, data);
         return node;
       } else {
-          //this value equal! and it need delete from branch after follow test
+          //this data equal! and it need delete from branch after follow test
         
         if (!node.left && !node.right) {
           return null;
@@ -129,9 +294,9 @@ class BinarySearchTree {
         while (minFromRight.left) {
           minFromRight = minFromRight.left;
         }
-        node.value = minFromRight.value;
+        node.data = minFromRight.data;
 
-        node.right = removeNode(node.right, minFromRight.value) 
+        node.right = removeNode(node.right, minFromRight.data) 
         
         return node;
       }
@@ -148,7 +313,7 @@ class BinarySearchTree {
       node = node.left;
     }
 
-    return node.value;
+    return node.data;
 }
 
   max() {
@@ -161,9 +326,11 @@ class BinarySearchTree {
       node = node.right;
     }
 
-    return node.value;
+    return node.data;
   }
 }
+
+
 
 module.exports = {
   BinarySearchTree
